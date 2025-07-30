@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
@@ -7,17 +7,20 @@ import EmpEdit from "../pages/EmpEdit";
 import EmpDetails from "../pages/EmpDetails";
 import NotFound from "../pages/NotFound";
 import AddEmp from "../pages/AddEmp";
+import PrivateRoute from "../components/PrivateRoute";
 
 export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* private routes */}
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/emp-edit/:id" element={<EmpEdit />} />
-          <Route path="/emp-details/:id" element={<EmpDetails />} />
-          <Route path="/add-emp" element={<AddEmp />} />
+        {/* protected routes inside PrivateRoute */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="emp-edit/:id" element={<EmpEdit />} />
+            <Route path="emp-details/:id" element={<EmpDetails />} />
+            <Route path="add-emp" element={<AddEmp />} />
+          </Route>
         </Route>
 
         {/* public routes */}

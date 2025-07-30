@@ -1,14 +1,15 @@
 import { PageHeader } from "@ant-design/pro-components";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../services/authService";
 
 export default function Header() {
   const navigate = useNavigate();
 
-  function handleLogout() {
-    console.log("log out settings");
-    navigate("/login");
-  }
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/");
+  };
 
   return (
     <PageHeader

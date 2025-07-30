@@ -1,10 +1,17 @@
 import axios from "axios";
+import { getToken } from "./authService";
 
+//const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const BASE_URL = "http://localhost:5275/api/Users";
 
 export async function FetchAllEmp() {
+  const token = getToken();
   try {
-    const res = await axios.get(BASE_URL);
+    const res = await axios.get(BASE_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.error("Error:", error);
